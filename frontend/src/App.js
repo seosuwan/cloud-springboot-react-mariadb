@@ -2,7 +2,7 @@ import React from "react";
 import {Redirect,Route,Switch} from 'react-router-dom'
 import './App.css';
 import { Home,Navi } from "features/common";
-import { UserLogin } from "features/user/components/UserLogin";
+import { UserLogin } from "features/user";
 import { UserList } from "features/user/components/UserList";
 import { UserDetail } from "features/user/components/UserDetail";
 import { UserAdd } from "features/user/components/UserAdd";

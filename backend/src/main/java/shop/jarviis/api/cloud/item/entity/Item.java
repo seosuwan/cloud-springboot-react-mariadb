@@ -3,7 +3,8 @@ package shop.jarviis.api.cloud.item.entity;
 import com.sun.istack.NotNull;
 import lombok.Data;
 import org.springframework.stereotype.Component;
-import shop.jarviis.api.cloud.board.entity.Aritcle;
+import shop.jarviis.api.cloud.board.entity.Article;
+
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -21,5 +22,5 @@ public class Item {
     @Column(name = "item_color") @NotNull private String itemColor;
     @Column(name = "released_date") @NotNull private String releasedDate;
     @OneToMany(mappedBy = "item")
-    private List<Aritcle> articleList = new ArrayList<>();
+    private List<Article> articleList = new ArrayList<>();
 }
