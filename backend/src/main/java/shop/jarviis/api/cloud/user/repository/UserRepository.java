@@ -12,8 +12,8 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     @Transactional
-    @Query(value = "select u.user_id userId, u.username, u.name, u.email, u.password, u.reg_date regDate " +
-            "from users u where u.user_name = :username and u.user_password = :password", nativeQuery = true)
+    @Query(value = "select u.username,u.user_id userId, u.name, u.email, u.password, u.reg_date regDate " +
+            "from users u where u.username = :username and u.password = :password", nativeQuery = true)
     Optional<User> login(@Param("username") String username, @Param("password") String password);
 }
 

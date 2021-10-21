@@ -20,12 +20,12 @@ export default function UserLogin() {
   const handleClick = e =>{
     e.preventDefault()
     const loginRequest = {username, password}
-    alert('로그인정보'+JSON.stringify(loginRequest))
+    alert('로그인정보'+ JSON.stringify(loginRequest))
     userLogin(loginRequest)
     .then(res => {
-      alert('로그인 성공, '+JSON.stringify(res.data))
+      alert('로그인 성공, '+ JSON.stringify(res.data))
       localStorage.setItem('sessionUser', JSON.stringify(res.data))
-      history.push("/users/detail")
+      history.push("/userDetail")
     })
     .catch(err => {
       alert('로그인 실패', + err)
