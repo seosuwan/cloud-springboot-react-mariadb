@@ -26,9 +26,9 @@ public final class UserController implements CommonController<User, Long> {
     private final UserRepository userRepository;
 
     @PostMapping("/login")
-    public ResponseEntity<Optional<User>> login(@RequestBody UserDto user) {
-        return new ResponseEntity(
-                userService.login(user.getUsername(), user.getPassword()), HttpStatus.OK);
+    public ResponseEntity<User> login(@RequestBody UserDto user) {
+        return ResponseEntity.ok(
+                userService.login(user.getUsername(), user.getPassword()).get());
     }
 
 //    @GetMapping("/{id}")

@@ -15,7 +15,7 @@ import java.util.List;
 public class User {
     @Id
     @Column(name = "user_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // PK 자동증가. 없으면 덮어씌워진다.
     private Long userId;
 
     @Column(length = 50) @NotNull private String username;

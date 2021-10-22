@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
@@ -50,7 +49,7 @@ export function UserDetail() {
                 </label>
             </li>
             <li>
-                <input type="button" value="회원정보수정"/>
+                <input type="button" value="회원정보수정" onClick={() => history.push('/userModify')}/>
             </li>
         </ul>
 </div>
