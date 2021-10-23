@@ -6,7 +6,9 @@ import axios from 'axios';
 export default function UserDetail() {
     const SERVER = 'http://localhost:8080'
     const history = useHistory()
-    const [ detail, setDetail] = useState({})
+    const [ detail, setDetail] = useState({
+        username:'',password:'',email:'',name:'', regDate: new Date().toLocaleDateString()
+    })
 
     const fetchOne = () => {
         const sessionUser = JSON.parse(localStorage.getItem('sessionUser')) 
@@ -22,6 +24,12 @@ export default function UserDetail() {
     useEffect(() => {
         fetchOne()
     },[])
+
+    const logout = e => {
+        e.preventDefault()
+        localStorage.setItem('sessionUser','')
+        history.push('/')
+    }
 
   return (
     <div>
@@ -50,6 +58,9 @@ export default function UserDetail() {
             </li>
             <li>
                 <input type="button" value="회원정보수정" onClick={() => history.push('/userModify')}/>
+            </li>
+            <li>
+                <input type="button" value="로그아웃" onClick={logout}/>
             </li>
         </ul>
 </div>

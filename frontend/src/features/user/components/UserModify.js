@@ -35,6 +35,7 @@ export default function UserModify() {
         UserModify(modifyRequest)
         .then(res =>{
             alert('회원정보 수정 성공')
+            localStorage.setItem('sessionUser',JSON.stringify(res.data))
             history.push('/userDetail')
         })
         .catch(err =>{

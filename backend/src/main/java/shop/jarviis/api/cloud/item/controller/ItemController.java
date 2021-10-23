@@ -2,6 +2,9 @@ package shop.jarviis.api.cloud.item.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import shop.jarviis.api.cloud.common.CommonController;
 import shop.jarviis.api.cloud.item.entity.Item;
@@ -13,7 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-
+@RequestMapping("/items")
 public class ItemController implements CommonController<Item, Long> {
     private final ItemRepository itemRepository;
 
@@ -48,8 +51,9 @@ public class ItemController implements CommonController<Item, Long> {
         return ResponseEntity.ok(itemRepository.count());
     }
 
+    @DeleteMapping("/{id}")
     @Override
-    public ResponseEntity<String> deleteById(Long id) {
+    public ResponseEntity<String> deleteById(@PathVariable Long id) {
         itemRepository.deleteById(id);
         return ResponseEntity.ok("SUCCESS");
     }

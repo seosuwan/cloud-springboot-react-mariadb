@@ -2,6 +2,9 @@ package shop.jarviis.api.cloud.board.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import shop.jarviis.api.cloud.board.entity.Article;
 import shop.jarviis.api.cloud.board.repository.BoardRepository;
@@ -13,6 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/articles")
 public class BoardController implements CommonController<Article, Long> {
     private final BoardService boardService;
     private final BoardRepository boardRepository;
@@ -49,7 +53,8 @@ public class BoardController implements CommonController<Article, Long> {
     }
 
     @Override
-    public ResponseEntity<String> deleteById(Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteById(@PathVariable Long id) {
         boardRepository.deleteById(id);
         return ResponseEntity.ok("SUCCESS");
     }
