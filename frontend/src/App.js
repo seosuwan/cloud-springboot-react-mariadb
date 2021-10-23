@@ -2,12 +2,8 @@ import React from "react";
 import {Redirect,Route,Switch} from 'react-router-dom'
 import './App.css';
 import { Home,Navi } from "features/common";
-import { UserLogin } from "features/user";
-import { UserList } from "features/user/components/UserList";
-import { UserDetail } from "features/user/components/UserDetail";
-import { UserAdd } from "features/user/components/UserAdd";
-import { UserModify } from "features/user/components/UserModify";
-import { UserRemove } from "features/user/components/UserRemove";
+import { UserLogin, UserList, UserDetail, UserAdd,UserModify,UserRemove } from "features/user";
+
 
 const App = () => (
   <div>

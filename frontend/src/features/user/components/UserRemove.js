@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-export function UserRemove() {
+export default function UserRemove() {
   
 
   return (
@@ -10,4 +10,3 @@ export function UserRemove() {
     </div>
   );
 }
-export default UserRemove

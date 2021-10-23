@@ -15,7 +15,7 @@ export default function UserLogin() {
   }
   const headers = {
     'Content-Type': 'application/json',
-    'Authorization': 'JWT fefege..'
+    'Authorization': 'JWT fefege..' //jwt 토큰값
   }
   const handleClick = e =>{
     e.preventDefault()
@@ -23,12 +23,20 @@ export default function UserLogin() {
     alert('로그인정보'+ JSON.stringify(loginRequest))
     userLogin(loginRequest)
     .then(res => {
-      alert('로그인 성공, '+ JSON.stringify(res.data))
-      localStorage.setItem('sessionUser', JSON.stringify(res.data))
-      history.push("/userDetail")
+      const user = res.data;
+      if(user.username != null){
+        alert('로그인 성공, '+ JSON.stringify(res.data))
+        localStorage.setItem('sessionUser', JSON.stringify(res.data))
+        history.push("/userDetail")
+      }else{
+        alert('아이디, 비번 오류로 로그인 실패')
+        document.getElementById('username').value = ''
+        document.getElementById('password').value = '' 
+      }
+      
     })
     .catch(err => {
-      alert('로그인 실패', + err)
+      alert('로그인 실패' + err)
     })
   }
   const userLogin = loginRequest => axios.post(`${SERVER}/users/login`, JSON.stringify(loginRequest), {headers})

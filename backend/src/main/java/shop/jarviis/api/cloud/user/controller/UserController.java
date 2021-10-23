@@ -27,9 +27,7 @@ public final class UserController implements CommonController<User, Long> {
 
     @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody UserDto user) {
-        return ResponseEntity.ok(
-                userService.login(user.getUsername(), user.getPassword()).get());
-    }
+        return ResponseEntity.ok(userService.login(user.getUsername(), user.getPassword()).orElse(new User())); }
 
 //    @GetMapping("/{id}")
 //    public ResponseEntity<UserDto> getById(@PathVariable long id) throws JsonProcessingException {
@@ -45,8 +43,9 @@ public final class UserController implements CommonController<User, Long> {
 //        return new ResponseEntity<>(userDto, HttpStatus.OK);
 //    }
 
+    @GetMapping()
     @Override
-    public ResponseEntity<List<User>> findAll() {
+    public ResponseEntity<List<User>> findAll() { //리스트여서 Null값이아니다.
         return ResponseEntity.ok(userRepository.findAll());
     }
     @GetMapping("/{id}")

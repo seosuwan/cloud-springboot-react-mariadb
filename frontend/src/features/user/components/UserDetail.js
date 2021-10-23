@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 
-export function UserDetail() {
+export default function UserDetail() {
     const SERVER = 'http://localhost:8080'
     const history = useHistory()
     const [ detail, setDetail] = useState({})
@@ -55,4 +55,3 @@ export function UserDetail() {
 </div>
   );
 }
-export default UserDetail
