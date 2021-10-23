@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useHistory  } from 'react-router-dom';
 
 
-export function UserAdd() {
+export default function UserAdd() {
     const history = useHistory()
     const SERVER = 'http://localhost:8080'
     const [join, setjoin] = useState({
@@ -73,4 +73,3 @@ export function UserAdd() {
 </div>
 )
 }
-export default UserAdd

@@ -23,7 +23,7 @@ export function UserModify() {
         })
     }
     const UserModify = modifyRequest => 
-    axios.post(`${SERVER}/users`, JSON.stringify(modifyRequest),{headers})
+    axios.put(`${SERVER}/users`, JSON.stringify(modifyRequest),{headers})
     const headers = {
         'Content-Type': 'application/json',
         'Authorization': 'JWT fefege..'
@@ -45,7 +45,7 @@ export function UserModify() {
   return (
     <div>
     <h1>회원정보 수정</h1>
-<form onSubmit={handleSubmit} method='POST'>
+<form onSubmit={handleSubmit} method='PUT'>
    <ul>
        <li>
        <label>

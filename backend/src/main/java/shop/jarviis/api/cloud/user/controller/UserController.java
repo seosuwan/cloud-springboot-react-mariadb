@@ -54,6 +54,14 @@ public final class UserController implements CommonController<User, Long> {
     public ResponseEntity<User> getById(@PathVariable Long id) {
         return ResponseEntity.ok(userRepository.getById(id));
     }
+
+    @PutMapping("")
+    public ResponseEntity<User> update(@RequestBody User user) {
+        logger.info(String.format("회원수정 정보: %s", user.toString()));
+        userRepository.save(user);
+        return ResponseEntity.ok(userRepository.getById(user.getUserId()));
+    }
+
     @PostMapping("")
     @Override
     public ResponseEntity<String> save(@RequestBody User user) {
