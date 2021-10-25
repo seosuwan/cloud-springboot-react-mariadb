@@ -1,13 +1,12 @@
-import axios from 'axios';
 import React, { useEffect,useState } from 'react';
 import { UserListForm } from '..';
 
 
 export default function UserList() {
   const [ list, setList] = useState([])
-  const SERVER = 'http://localhost:8080'
+  
   const fetchList = () => { //이벤트 e 가 없어도 자동 실행하라는..
-    axios.get(`${SERVER}/users`)
+     userFetchList()
     .then(res => setList(res.data))
     .catch(err => console.log(err))
   }

@@ -1,10 +1,9 @@
-import axios from 'axios';
+
 import React, { useState } from 'react';
 import { useHistory  } from 'react-router-dom';
 
 export default function UserModify() {
   const history = useHistory()
-    const SERVER = 'http://localhost:8080'
     const sessionUser = JSON.parse(localStorage.getItem('sessionUser')) 
     const [modify, setModify] = useState({
         userId:sessionUser.userId,
@@ -14,7 +13,7 @@ export default function UserModify() {
         name:sessionUser.name,
         regDate: sessionUser.regDate
     })
-    
+    const {userId, username, password, email, name} = modify
     const handleChange = e => {
         const {value, name} = e.target
         setModify({
@@ -22,12 +21,7 @@ export default function UserModify() {
             [name] : value
         })
     }
-    const UserModify = modifyRequest => 
-    axios.post(`${SERVER}/users`, JSON.stringify(modifyRequest),{headers})
-    const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': 'JWT fefege..'
-      }
+
     const handleSubmit = e => {
         e.preventDefault()
         const modifyRequest = {...modify}
