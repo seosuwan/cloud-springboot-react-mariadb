@@ -8,13 +8,16 @@ export default function UserAdd() {
         username:'', password:'', email:'', name:'', regDate: new Date().toLocaleDateString()
     })
     const {username, password, email, name ,} = join
-    const handleChange = e => {
-        const {value, name} = e.target
-        setjoin({
-            ...join,
-            [name] : value
-        })
-    }
+    
+    const handleChange = useCallback (
+        e => {
+            const{value, name} = e.target
+            setJoin({
+                ...join,
+                [name] :  value
+            })
+        }, [join]
+    )
     const handleSubmit = e => {
         e.preventDefault()
         const joinRequest = {...join}

@@ -5,8 +5,8 @@ const userJoinPage = async(x) => {
   const res = await userAPI.userJoin(x)
   return res.data
 }
-const userFetchOne = async(x) => {
-  const res = await userAPI.fetchOne(x)
+const userDetailPage = async(x) => {
+  const res = await userAPI.userDetailPage(x)
   return res.data
 }
 const userFetchList = async() => {
@@ -27,10 +27,42 @@ const userRemovePage = async(x) =>{
 } 
 
 export const joinPage = createAsyncThunk('users/join',userJoinPage)
-export const userFetchOne = createAsyncThunk('users/one',userFetchOne)
+export const userDetailPage = createAsyncThunk('users/one',userDetailPage)
 export const userFetchList = createAsyncThunk('users/list',userFetchList)
 export const userLoginPage = createAsyncThunk('users/login',userLoginPage)
 export const userModifyPage = createAsyncThunk('users/modify',userModifyPage)
 export const userRemovePage = createAsyncThunk('users/remove',userRemovePage)
 
-export default counterSlice.reducer;
+
+const userSlice = createSlice({
+  name: users,
+  initialState: {
+    userState: {},
+    type: '',
+    keyword: '',
+    params: {}
+  },
+  reducers: {},
+  extraReducers: {
+    [joinPage.fulfilled]: ( state, action ) => { state.userState = action.payload },
+    [detailPage.fulfilled]: ( state, {meta, payload} ) => { state.userState = payload},
+    [listPage.fulfilled]: ( state, {meta, payload} ) => { state.pageResult = payload },
+    [loginPage.fulfilled]: ( state, {meta, payload} ) => {
+      state.userState = payload
+      window.localStorage.setItem('sessionUser', JSON.stringify(payload))
+    },
+    [modifyPage.fulfilled]: ( state, action ) => { 
+      state.userState = action.payload 
+      window.localStorage.setItem('sessionUser', JSON.stringify(payload))
+    },
+    [removePage.fulfilled]: ( state, {meta, payload }) => { 
+      state.userState = payload
+      window.localStorage.setItem('sessionUser', '')
+    }
+  }
+
+})
+export const currentUserState = state => state.users.userState
+export const currentUserParam = state => state.users.param
+export default userSlice.reducer;
+

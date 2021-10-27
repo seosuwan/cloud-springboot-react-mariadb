@@ -21,7 +21,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/users")
 public final class UserController implements CommonController<User, Long> {
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final UserServiceImpl userService;
     private final UserRepository userRepository;
 
