@@ -5,7 +5,7 @@ const headers = {
   'Authorization': 'JWT fefege..'
 }
 const userJoin = x => axios.post(`${SERVER}/users`, JSON.stringify(x),{headers})
-const fetchOne = x => axios.get(`${SERVER}/users/${x.userId}`)
+const userDetailPage = x => axios.get(`${SERVER}/users/${x.userId}`)
 const fetchList = x =>  axios.get(`${SERVER}/users`)
 const userLogin = x => axios.post(`${SERVER}/users/login`, JSON.stringify(x), {headers})
 const userModify = x => axios.post(`${SERVER}/users`, JSON.stringify(x),{headers})
@@ -13,7 +13,7 @@ const userRemove = x => axios.delete(`${SERVER}/users/${x.userId}`)
 
 export default {
   userJoin,
-  fetchOne,
+  userDetailPage,
   fetchList,
   userLogin,
   userModify,

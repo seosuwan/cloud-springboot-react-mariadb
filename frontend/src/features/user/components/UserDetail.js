@@ -8,10 +8,10 @@ export default function UserDetail() {
     const [ detail, setDetail] = useState({
         username:'',password:'',email:'',name:'', regDate: new Date().toLocaleDateString()
     })
-    const fetchOne = () => {
+    const userDetail = () => {
         const sessionUser = JSON.parse(localStorage.getItem('sessionUser')) 
         // alert('사용자 아이디 :' + sessionUser.userId)
-        user.fetchOne(sessionUser)
+        userDetail(sessionUser)
         .then(res => {
             setDetail(res.data)
         })
@@ -20,7 +20,7 @@ export default function UserDetail() {
         })
     }
     useEffect(() => {
-        fetchOne()
+        userDetail()
     },[])
 
     const logout = e => {

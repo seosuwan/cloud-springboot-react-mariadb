@@ -20,7 +20,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/users")
-public final class UserController implements CommonController<User, Long> {
+public class UserController implements CommonController<User, Long> {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final UserServiceImpl userService;
     private final UserRepository userRepository;
 
@@ -59,6 +60,13 @@ public final class UserController implements CommonController<User, Long> {
         userRepository.save(user);
         return ResponseEntity.ok("SUCCESS");
     }
+    @PutMapping
+    public ResponseEntity<User> update(@RequestBody User user) {
+        logger.info(String.format("회원수정 정보: %s", user.toString()));
+        userRepository.save(user);
+        return ResponseEntity.ok(userRepository.getById(user.getUserId()));
+    }
+
 
     @Override
     public ResponseEntity<Optional<User>> findById(Long id) {

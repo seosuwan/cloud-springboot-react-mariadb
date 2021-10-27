@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+
 export default function UserLogin() {
   const [login, setLogin] = useState({})
   const {username, password} = login
@@ -12,10 +13,18 @@ export default function UserLogin() {
       [name] : value
     })
   }
+
+  const changeNull = ls =>{
+    for(const i of ls ){
+      document.getElementById(i).value = ''
+    }
+  }
+  
   const handleClick = e =>{
     e.preventDefault()
     e.stopPropagation()
     const loginRequest = {username, password}
+    /*
     userLogin(loginRequest)
     .then(res => {
       const user = res.data;
@@ -32,7 +41,9 @@ export default function UserLogin() {
     })
     .catch(err => {
       alert('로그인 실패' + err)
+      changeNull(['username','password'])
     })
+    */
   }
   
   return (

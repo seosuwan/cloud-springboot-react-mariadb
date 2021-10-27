@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useHistory  } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { joinPage } from '../reducer/userSlice';
 
 
 export default function UserAdd() {
     const history = useHistory()
-    const [join, setjoin] = useState({
+    const dispatch = useDispatch()
+    const [join, setJoin] = useState({
         username:'', password:'', email:'', name:'', regDate: new Date().toLocaleDateString()
     })
-    const {username, password, email, name ,} = join
+    const {username, password, email, name } = join
     
     const handleChange = useCallback (
         e => {
@@ -18,18 +21,20 @@ export default function UserAdd() {
             })
         }, [join]
     )
-    const handleSubmit = e => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        const joinRequest = {...join}
-        alert(`회원가입 정보: ${JSON.stringify(joinRequest)}`)
-        userJoin(joinRequest)
-        .then(res =>{
-            alert('회원가입 성공')
-            history.push('/userLogin')
-        })
-        .catch(err =>{
-            alert(`회원가입 실패 :${err} `)
-        })
+        e.stopPropagation()
+        const json = {
+            'username': join.username,
+            'password': join.password,
+            'email': join.email,
+            'name': join.name,
+            'regDate': join.regDate
+        }
+        alert(`회원가입 정보: ${JSON.stringify(json)}`)
+         dispatch(joinPage(json))
+        alert(`${join.username} 회원가입 환영`)
+        history.push('/usersLogin')
     }
 
 
@@ -40,7 +45,8 @@ export default function UserAdd() {
         <ul>
             <li>
                 <label>
-                    아이디: <input type="text" id="username" name='username' value={username} size="1" minlength="4" maxlength="15" onChange={handleChange}/>
+                아이디 : <input type="text" id="username" name="username" value={username} onChange={handleChange}
+                    size="10" minlength="4" maxlength="15"/>
                 </label>
                 <small>4~15자리 이내의 영문과 숫자</small>
             </li>
@@ -61,7 +67,7 @@ export default function UserAdd() {
                 </label>
             </li>
             <li>
-                <input type="submit" value="회원가입"/>
+                <input type="submit" onClick={ e => handleSubmit(e)} value="회원가입"/>
             </li>
         </ul>
     </form>
