@@ -19,7 +19,7 @@ import java.util.Optional;
 @CrossOrigin("*")
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/users")//uri 
 public class UserController implements CommonController<User, Long> {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final UserServiceImpl userService;

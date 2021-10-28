@@ -14,7 +14,7 @@ export default function UserAdd() {
     
     const handleChange = useCallback (
         e => {
-            const{value, name} = e.target
+            const{value, name} = e.target //target 
             setJoin({
                 ...join,
                 [name] :  value
@@ -23,7 +23,7 @@ export default function UserAdd() {
     )
     const handleSubmit = async (e) => {
         e.preventDefault()
-        e.stopPropagation()
+        e.stopPropagation() // 버블링 전달되면 이벤트 정지
         const json = {
             'username': join.username,
             'password': join.password,
@@ -32,7 +32,7 @@ export default function UserAdd() {
             'regDate': join.regDate
         }
         alert(`회원가입 정보: ${JSON.stringify(json)}`)
-         dispatch(joinPage(json))
+        dispatch(joinPage(json))
         alert(`${join.username} 회원가입 환영`)
         history.push('/usersLogin')
     }
