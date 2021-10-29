@@ -33,7 +33,7 @@ export const loginPage = createAsyncThunk('userLogin', userLoginPage)
 export const modifyPage = createAsyncThunk('userModify', userModifyPage)
 export const removePage = createAsyncThunk('userRemove', userRemovePage)
 
-const userSlice = createSlice({
+const userSlice = createSlice({//덕스패턴 변수와메서드를 보고 객체의 타입을 결정한다.
  name: 'users',
  initialState: {
    userState: {

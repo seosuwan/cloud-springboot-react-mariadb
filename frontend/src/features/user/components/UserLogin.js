@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginPage } from '../reducer/userSlice';
 
 export default function UserLogin() {
   const [login, setLogin] = useState({})
-  const {username, password} = login
+  const dispatch = useDispatch()
   const history =useHistory()
+  const {username, password} = login
+  
   
   const handleChange = e => {
     const {value, name} = e.target
@@ -20,10 +24,21 @@ export default function UserLogin() {
     }
   }
   
-  const handleClick = e =>{
+  const handleClick = async e =>{
     e.preventDefault()
     e.stopPropagation()
     const loginRequest = {username, password}
+    await dispatch(loginPage(loginRequest))
+    const loginUser = JSON.parse(localStorage.getItem('sessionUser'))
+    if(loginUser.username != null){
+      alert(`${loginUser.name} 님 환영합니다!!!!!`)
+      history.push("/userDetail")
+    }else{
+      alert('아이디, 비번 오류로 로그인 실패')
+        document.getElementById('username').value = ''
+        document.getElementById('password').value = '' 
+      }
+
     /*
     userLogin(loginRequest)
     .then(res => {

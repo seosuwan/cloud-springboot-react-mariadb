@@ -22,8 +22,8 @@ export default function UserAdd() {
         }, [join]
     )
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        e.stopPropagation() // 버블링 전달되면 이벤트 정지
+        e.preventDefault() //상태전이를 위해 redux에 상태를 다 놔뒀기때문에 액션을 찾는 폼에게 디폴트라고 알려준다.
+        e.stopPropagation() // 버블링이 전달하며 내려가면서 다른 이벤트는 정지.
         const json = {
             'username': join.username,
             'password': join.password,
@@ -32,7 +32,7 @@ export default function UserAdd() {
             'regDate': join.regDate
         }
         alert(`회원가입 정보: ${JSON.stringify(json)}`)
-        dispatch(joinPage(json))
+        dispatch(joinPage(json)) //redux 땅으로 가서 찾으셈
         alert(`${join.username} 회원가입 환영`)
         history.push('/usersLogin')
     }
