@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 export default function UserRemove() {
   const [pwd, setPwd] = useState('')
   const sessionUser = JSON.parse(localStorage.getItem('sessionUser'))
   const history = useHistory()
-
   
   const handleChange = e => {
     setPwd(e.target.value)
   }
+
   const handleClick = e => {
     e.preventDefault()
     if(sessionUser.password === pwd){
@@ -28,7 +28,7 @@ export default function UserRemove() {
   }
   return (
     <div>
-      <h1>회원탈퇴</h1>
+      <h1><br/>회원탈퇴</h1>
       <form method="DELETE">
     <ul>
         <li>
