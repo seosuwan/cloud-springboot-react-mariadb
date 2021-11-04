@@ -1,15 +1,14 @@
-import { 
+import {
   configureStore,
-  combineReducers,
+  combineReducers, // redux의 Reducer 의 집합과 같다.
   getDefaultMiddleware
- } from '@reduxjs/toolkit';
+} from "@reduxjs/toolkit";
 import logger from 'redux-logger'
-import counterReducer from 'features/counter/counterSlice'
-import { userReducer } from 'features/user';
+import user from 'features/user/reducer/userSlice';
 
-const rootReducer = combineReducers({ userReducer })
+const rootReducer = combineReducers({ user }) //리듀서에 유저스라는 이름으로있지만 리듀서밖에서는 유저라고부를거야!
 
 export const store = configureStore({
   reducer: rootReducer,
-  middleware : (getDefaultMiddleware) => getDefaultMiddleware().concat(logger)
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });

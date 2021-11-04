@@ -1,11 +1,13 @@
+import Layout from 'features/common/components/Layout';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Logout } from '..';
+import styled from 'styled-components'
 export default function UserDetail() {
     const detail = JSON.parse(localStorage.getItem('sessionUser'))
     const history = useHistory()
   return (
-    <div>
+      <Layout>
+    <Main>
          <h1><br/>회원정보</h1>
         <ul>
             <li>
@@ -38,9 +40,16 @@ export default function UserDetail() {
                 <input type="button" value="회원정보수정" onClick={()=> history.push('/users/modify')}/>
             </li>
             <li>
-               <Logout/> 
+        
             </li>
         </ul>
-    </div>
+    </Main>
+    </Layout>
   );
 }
+const Main = styled.div`
+width: 500px;
+margin: 0 auto;
+text-decoration:none
+text-align: center;
+`

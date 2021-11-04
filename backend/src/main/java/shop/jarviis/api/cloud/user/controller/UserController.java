@@ -46,7 +46,7 @@ public class UserController implements CommonController<User, Long> {
     @GetMapping()
     @Override
     public ResponseEntity<List<User>> findAll() { //리스트여서 Null값이아니다.
-        return ResponseEntity.ok(userRepository.findAll());
+        return null;
     }
     @GetMapping("/{id}")
     @Override
@@ -60,13 +60,17 @@ public class UserController implements CommonController<User, Long> {
         userRepository.save(user);
         return ResponseEntity.ok("SUCCESS");
     }
+    @GetMapping("/list/{page}")
+    public ResponseEntity<List<User>> getList(@PathVariable int page){
+        System.out.println(":::::::::: PageNumber ::::::::::" +page);
+        return ResponseEntity.ok(userRepository.findAll());
+    }
     @PutMapping
     public ResponseEntity<User> update(@RequestBody User user) {
         logger.info(String.format("회원수정 정보: %s", user.toString()));
         userRepository.save(user);
         return ResponseEntity.ok(userRepository.getById(user.getUserId()));
     }
-
 
     @Override
     public ResponseEntity<Optional<User>> findById(Long id) {
@@ -76,6 +80,12 @@ public class UserController implements CommonController<User, Long> {
     @Override
     public ResponseEntity<Boolean> existsById(Long id) {
         return ResponseEntity.ok(userRepository.existsById(id));
+    }
+
+
+    @GetMapping("/exist/{username}")
+    public ResponseEntity<Boolean> exist(@PathVariable String username) {
+        return ResponseEntity.ok(userRepository.existsByUsername(username));
     }
 
     @Override

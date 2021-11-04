@@ -1,35 +1,24 @@
-import React, { useState } from 'react';
+import Layout from 'features/common/components/Layout';
+import React, { useCallback, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
+import {removePage} from 'features/user/reducer/userSlice'
+import styled from 'styled-components'
 
 export default function UserRemove() {
   const [pwd, setPwd] = useState('')
   const sessionUser = JSON.parse(localStorage.getItem('sessionUser'))
   const history = useHistory()
-  
-  const handleChange = e => {
-    setPwd(e.target.value)
-  }
-
-  const handleClick = e => {
-    e.preventDefault()
-    if(sessionUser.password === pwd){
-      UserRemove(sessionUser)
-      .then(res => {
-        console.log(res.data)
-        localStorage.setItem('sessionUser', '')
-        history.push('/')
-      })
-      .catch(err => console.log(err))
-    }else{
-      alert('입력된 비밀번호가 틀립니다')
-      document.getElementById('password').value = ''
-    }
-    
-  }
+  const dispatch = useDispatch()
   return (
-    <div>
+    <Layout>
+    <Main>
       <h1><br/>회원탈퇴</h1>
-      <form method="DELETE">
+      <form method="DELETE" onSubmit={useCallback(e => {
+        e.preventDefault();
+        (sessionUser.password === pwd) ? dispatch(removePage(sessionUser.userId))
+        : document.getElementById('password').value = ''
+      })}>
     <ul>
         <li>
               <label>
@@ -37,12 +26,19 @@ export default function UserRemove() {
                 </label>
             </li>
         <li><label for="pw">비밀번호 확인</label>
-        <input type="password" id="password" name="password" onChange={handleChange}/></li>
-        <li><input type="submit" value="탈퇴요청" onClick={handleClick}/></li>
+        <input type="password" id="password" name="password" onChange={e => setPwd(e.target.value)}/></li>
+        <li><input type="submit" value="탈퇴요청" /></li>
         <li><input type="button" value="탈퇴취소" onClick={e => history.push("/users/detail")}/></li>
     </ul>
 </form>
 
-    </div>
+    </Main>
+    </Layout>
   );
 }
+const Main = styled.div`
+width: 500px;
+margin: 0 auto;
+text-decoration:none
+text-align: center;
+`
